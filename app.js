@@ -1,14 +1,15 @@
-// Iniciamos un servidor con express
-const express = require('express');
+app.listen(3000, () => {
+    console.log("Servidor iniciado en el puerto 3000");
+  });
+
+
+const express = require("express");
 const app = express();
-const port= 3000;
+app.use(express.json());
+// Importamos el Router de Libros
+const librosRouter = require("./routes/libros");
+// Importamos el Middleware Error Handler
+const errorHandler = require("./middlewares/errorHandler");
+app.use("/libros", librosRouter);
+app.use(errorHandler);
 
-app.listen(port, () => {
-    console.log(`Servidor corriendo en el puerto ${port}`);
-});
-
-// ---Enrutamiento en Express.js---
-
-app.get('/', (req, res) => {
-    res.send('...Hola Mundo...');
-})
